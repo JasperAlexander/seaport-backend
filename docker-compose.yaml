@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  # db:
+  #   image: postgres
+  api:
+    build: .
+    container_name: seaport_backend
+    command: python3.10 manage.py runserver 0.0.0.0:8000
+    ports: 
+      - "8000:8000"
+    # depends_on:
+    #   - db
