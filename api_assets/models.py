@@ -4,13 +4,13 @@ from api_collections.models import Collection
 from api_users.models import User
 from api_tokens.models import Token
 from api_orders.models import Order
-from api_events.models import Event
+# from api_events.models import Event
 
 
 class Asset(models.Model):
     token_id = models.CharField(max_length=256)
     name = models.CharField(max_length=100)
-    description = models.TextField(max_length=20000)
+    description = models.TextField(max_length=2000, blank=True)
     image_url = models.URLField(blank=True)
     external_link = models.URLField(blank=True)
     asset_contract = models.ForeignKey(
@@ -21,11 +21,12 @@ class Asset(models.Model):
         User, null=True, on_delete=models.SET_NULL, related_name="owner")
     creator = models.ForeignKey(
         User, null=True, on_delete=models.SET_NULL, related_name="creator")
-    last_sale = models.ForeignKey(
-        Event, null=True, blank=True, on_delete=models.SET_NULL)
+    # last_sale = models.ForeignKey(
+    #     Event, null=True, blank=True, on_delete=models.SET_NULL)
     transfer_fee = models.IntegerField(default=0)
     transfer_fee_payment_token = models.ForeignKey(
         Token, null=True, blank=True, on_delete=models.SET_NULL)
     orders = models.ForeignKey(
         Order, null=True, blank=True, on_delete=models.SET_NULL)
     is_nsfw = models.BooleanField(default=False)
+    listing_date = models.DateTimeField(blank=True, null=True)

@@ -12,7 +12,7 @@ class GetAssetsView(generics.ListAPIView):
     pagination_class = AssetsCursorPagination
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter]  # , filters.OrderingFilter]
-    filterset_fields = ["asset_contract__address", "owner__address"]
+    filterset_fields = ["asset_contract__address", "owner__username"]
     search_fields = ["name", "collection__name"]
     # ordering_fields = [""]
 

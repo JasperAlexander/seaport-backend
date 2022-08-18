@@ -13,3 +13,8 @@ class GetEventsView(generics.ListAPIView):
 class GetEventView(generics.RetrieveAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+
+class CreateEventView(generics.CreateAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer

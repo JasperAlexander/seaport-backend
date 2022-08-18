@@ -6,6 +6,11 @@ class ContractPublicSerializer(serializers.Serializer):
     address = serializers.CharField(read_only=True)
     name = serializers.CharField(read_only=True)
     description = serializers.CharField(read_only=True)
+    schema_name = serializers.CharField(read_only=True)
+
+
+class EventContractPublicSerializer(serializers.Serializer):
+    address = serializers.CharField(read_only=True)
 
 
 class ContractSerializer(serializers.ModelSerializer):
@@ -14,5 +19,6 @@ class ContractSerializer(serializers.ModelSerializer):
         fields = [
             "address",
             "name",
-            "description"
+            "description",
+            "schema_name"
         ]

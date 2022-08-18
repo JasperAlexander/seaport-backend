@@ -16,7 +16,6 @@ class TokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Token
         fields = [
-            "pk",
             "symbol",
             "address",
             "image_url",

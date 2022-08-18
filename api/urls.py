@@ -11,5 +11,7 @@ urlpatterns = [
     path("api/v1/", include("api_events.urls")),
     path("api/v1/", include("api_tokens.urls")),
     path("api/v1/", include("api_orders.urls")),
-    path("api/v1/", include("api_items.urls")),
+    path("api/v1/", include("api_orderparameters.urls")),
+    path("api/v1/", include("api_orderoffers.urls")),
+    path("api/v1/", include("api_orderconsiderations.urls"))
 ]

@@ -6,7 +6,7 @@ class Collection(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=20000)
     slug = models.CharField(max_length=50)
-    created_timestamp = models.DateTimeField()
+    created_timestamp = models.DateTimeField(auto_created=True)
     banner_image_url = models.URLField(blank=True)
     image_url = models.URLField(blank=True)
     external_url = models.URLField(blank=True)

@@ -36,31 +36,38 @@ INSTALLED_APPS = [
     "api_transactions",
     "api_tokens",
     "api_orders",
-    "api_items",
+    "api_orderparameters",
+    "api_orderoffers",
+    "api_orderconsiderations",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware"
+    "django.middleware.clickjacking.XFrameOptionsMiddleware"
 ]
 
 ROOT_URLCONF = "api.urls"
 CORS_URLS_REGEX = r"^/api/v1/.*"
-# CORS_ALLOWED_ORIGINS = []  # Use https in production
-CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = [  # Use https in production
     "http://localhost:3000"
 ]
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+)
 
-if DEBUG:
-    CORS_ALLOWED_ORIGINS += [
-        "http://localhost:3000"
-    ]
+# if DEBUG:
+#     CORS_ALLOWED_ORIGINS += [
+#         "http://localhost:3000"
+#     ]
 
 TEMPLATES = [
     {

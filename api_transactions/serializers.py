@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Transaction
-from api_users.serializers import UserPublicSerializer
+# from api_users.serializers import UserPublicSerializer
 
 
 class TransactionPublicSerializer(serializers.Serializer):
@@ -12,8 +12,8 @@ class TransactionPublicSerializer(serializers.Serializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    from_account = UserPublicSerializer(read_only=True)
-    to_account = UserPublicSerializer(read_only=True)
+    # from_account = UserPublicSerializer(read_only=True)
+    # to_account = UserPublicSerializer(read_only=True)
 
     class Meta:
         model = Transaction
@@ -22,7 +22,7 @@ class TransactionSerializer(serializers.ModelSerializer):
             "block_number",
             "hash",
             "index",
-            "from_account",
-            "to_account",
+            # "from_account",
+            # "to_account",
             "created_timestamp"
         ]

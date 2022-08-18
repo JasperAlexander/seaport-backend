@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ApiItemsConfig(AppConfig):
+class ApiOrderoffersConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "api_items"
+    name = "api_orderoffers"

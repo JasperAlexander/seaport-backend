@@ -9,8 +9,8 @@ class GetCollectionsView(generics.ListAPIView):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
     pagination_class = CollectionsCursorPagination
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["slug"]
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ["slug"]
 
     # def get_queryset(self):
     #     slug = self.request.query_params.get('slug')
