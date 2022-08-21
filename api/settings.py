@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "api_orders",
     "api_orderparameters",
     "api_orderoffers",
-    "api_orderconsiderations",
+    "api_orderconsiderations"
 ]
 
 MIDDLEWARE = [

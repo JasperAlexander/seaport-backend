@@ -1,8 +1,8 @@
 from django.db import models
-from api_orderparameters.models import OrderParameters
+from api_orderparameters.models import OrderParameter
 
 
 class Order(models.Model):
     parameters = models.ForeignKey(
-        OrderParameters, null=True, on_delete=models.SET_NULL)
+        OrderParameter, null=True, on_delete=models.SET_NULL)
     signature = models.CharField(max_length=200)

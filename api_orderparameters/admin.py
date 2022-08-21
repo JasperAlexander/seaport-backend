@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import OrderParameters
+from .models import OrderParameter
 
-admin.site.register(OrderParameters)
+admin.site.register(OrderParameter)

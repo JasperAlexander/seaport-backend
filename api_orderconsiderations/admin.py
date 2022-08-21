@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import Consideration
+from .models import OrderConsideration
 
-admin.site.register(Consideration)
+admin.site.register(OrderConsideration)

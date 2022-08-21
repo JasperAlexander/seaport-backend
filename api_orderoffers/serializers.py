@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Offer
+from .models import OrderOffer
 
 
-class OfferPublicSerializer(serializers.Serializer):
+class OrderOfferPublicSerializer(serializers.Serializer):
     itemType = serializers.IntegerField(read_only=True)
     token = serializers.CharField(read_only=True)
     identifierOrCriteria = serializers.CharField(read_only=True)
@@ -10,15 +10,9 @@ class OfferPublicSerializer(serializers.Serializer):
     endAmount = serializers.IntegerField(read_only=True)
 
 
-class OfferSerializer(serializers.ModelSerializer):
-    itemType = serializers.IntegerField()
-    token = serializers.CharField()
-    identifierOrCriteria = serializers.CharField()
-    startAmount = serializers.IntegerField()
-    endAmount = serializers.IntegerField()
-
+class OrderOfferSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Offer
+        model = OrderOffer
         fields = [
             "itemType",
             "token",
@@ -26,8 +20,3 @@ class OfferSerializer(serializers.ModelSerializer):
             "startAmount",
             "endAmount"
         ]
-
-    # def create(self, validated_data):
-    #     offer_data = validated_data.pop('offer')
-    #     offer = Offer.objects.create(**offer_data)
-    #     return offer

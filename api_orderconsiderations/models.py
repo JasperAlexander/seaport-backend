@@ -1,11 +1,11 @@
 from django.db import models
 
 
-class Consideration(models.Model):
+class OrderConsideration(models.Model):
     itemType = models.IntegerField(choices=((0, 'Native'), (1, 'ERC20'), (2, 'ERC721'), (
         3, 'ERC1155'), (4, 'ERC721 with criteria'), (5, 'ERC1155 with criteria')))
-    token = models.CharField(max_length=50)
+    token = models.CharField(max_length=200)
     identifierOrCriteria = models.CharField(max_length=200)
     startAmount = models.IntegerField()
     endAmount = models.IntegerField()
-    recipient = models.CharField(max_length=2000)
+    recipient = models.CharField(max_length=200, blank=True, null=True)

@@ -11,3 +11,4 @@ class GetTokensView(generics.ListAPIView):
 class GetTokenView(generics.RetrieveAPIView):
     queryset = Token.objects.all()
     serializer_class = TokenSerializer
+    lookup_field = "address"

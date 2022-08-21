@@ -1,18 +1,18 @@
 from rest_framework import generics
-from .models import OrderParameters
-from .serializers import OrderParametersPublicSerializer, OrderParametersSerializer
+from .models import OrderParameter
+from .serializers import OrderParametersSerializer
 
 
 class GetOrderParametersView(generics.ListAPIView):
-    queryset = OrderParameters.objects.all()
-    serializer_class = OrderParametersPublicSerializer
+    queryset = OrderParameter.objects.all()
+    serializer_class = OrderParametersSerializer
 
 
 class GetOrderParameterView(generics.RetrieveAPIView):
-    queryset = OrderParameters.objects.all()
-    serializer_class = OrderParametersPublicSerializer
+    queryset = OrderParameter.objects.all()
+    serializer_class = OrderParametersSerializer
 
 
-class CreateOrderParametersView(generics.CreateAPIView):
-    queryset = OrderParameters.objects.all()
+class CreateOrderParameterView(generics.CreateAPIView):
+    queryset = OrderParameter.objects.all()
     serializer_class = OrderParametersSerializer

@@ -16,13 +16,15 @@ class Event(models.Model):
         ('approve', 'Approve')
     ))
     asset = models.ForeignKey(Asset, null=True, on_delete=models.SET_NULL)
-    created_timestamp = models.DateTimeField(auto_created=True)
     from_account = models.ForeignKey(
-        User, null=True, on_delete=models.SET_NULL, related_name="from_account")
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='from_account')
     to_account = models.ForeignKey(
-        User, blank=True, null=True, on_delete=models.SET_NULL, related_name="to_account")
-    is_private = models.BooleanField(default=False)
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='to_account')
+    start_time = models.CharField(max_length=100)
+    end_time = models.CharField(max_length=100)
+    start_amount = models.CharField(max_length=100)
+    end_amount = models.CharField(max_length=100)
     payment_token = models.ForeignKey(
-        Token, null=True, on_delete=models.SET_NULL)
-    quantity = models.FloatField()
-    total_price = models.FloatField()
+        Token, null=True, blank=True, on_delete=models.SET_NULL)
+    is_private = models.BooleanField(default=False)
+    created_timestamp = models.DateTimeField(auto_now_add=True)

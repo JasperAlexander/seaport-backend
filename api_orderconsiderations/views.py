@@ -1,18 +1,18 @@
 from rest_framework import generics
-from .models import Consideration
-from .serializers import ConsiderationPublicSerializer, ConsiderationSerializer
+from .models import OrderConsideration
+from .serializers import OrderConsiderationSerializer, OrderConsiderationPublicSerializer
 
 
 class GetOrderConsiderationsView(generics.ListAPIView):
-    queryset = Consideration.objects.all()
-    serializer_class = ConsiderationPublicSerializer
+    queryset = OrderConsideration.objects.all()
+    serializer_class = OrderConsiderationPublicSerializer
 
 
 class GetOrderConsiderationView(generics.RetrieveAPIView):
-    queryset = Consideration.objects.all()
-    serializer_class = ConsiderationPublicSerializer
+    queryset = OrderConsideration.objects.all()
+    serializer_class = OrderConsiderationPublicSerializer
 
 
-class CreateOrderConsiderationsView(generics.CreateAPIView):
-    queryset = Consideration.objects.all()
-    serializer_class = ConsiderationSerializer
+class CreateOrderConsiderationView(generics.CreateAPIView):
+    queryset = OrderConsideration.objects.all()
+    serializer_class = OrderConsiderationSerializer

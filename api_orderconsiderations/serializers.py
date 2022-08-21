@@ -1,10 +1,8 @@
 from rest_framework import serializers
-
-from api_orderparameters.models import OrderParameters
-from .models import Consideration
+from .models import OrderConsideration
 
 
-class ConsiderationPublicSerializer(serializers.Serializer):
+class OrderConsiderationPublicSerializer(serializers.Serializer):
     itemType = serializers.IntegerField(read_only=True)
     token = serializers.CharField(read_only=True)
     identifierOrCriteria = serializers.CharField(read_only=True)
@@ -13,16 +11,9 @@ class ConsiderationPublicSerializer(serializers.Serializer):
     recipient = serializers.CharField(read_only=True)
 
 
-class ConsiderationSerializer(serializers.ModelSerializer):
-    itemType = serializers.IntegerField()
-    token = serializers.CharField()
-    identifierOrCriteria = serializers.CharField()
-    startAmount = serializers.IntegerField()
-    endAmount = serializers.IntegerField()
-    recipient = serializers.CharField()
-
+class OrderConsiderationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Consideration
+        model = OrderConsideration
         fields = [
             "itemType",
             "token",
@@ -31,8 +22,3 @@ class ConsiderationSerializer(serializers.ModelSerializer):
             "endAmount",
             "recipient"
         ]
-
-    # def create(self, validated_data):
-    #     consideration_data = validated_data.pop('consideration')
-    #     consideration = Consideration.objects.create(**consideration_data)
-    #     return consideration

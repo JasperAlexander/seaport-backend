@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import Offer
+from .models import OrderOffer
 
-admin.site.register(Offer)
+admin.site.register(OrderOffer)

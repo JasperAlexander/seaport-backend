@@ -4,9 +4,9 @@ from . import views
 
 urlpatterns = [
     path("orderoffers/", views.GetOrderOffersView.as_view(),
-         name="orderoffers-list"),
-    path("orderoffers/create/", views.CreateOrderOffersView.as_view(),
-         name="orderoffers-create"),
+         name="orderoffer-list"),
+    path("orderoffers/create/", views.CreateOrderOfferView.as_view(),
+         name="orderoffer-create"),
     path("orderoffer/<int:pk>/", views.GetOrderOfferView.as_view(),
-         name="orderoffers-detail"),
+         name="orderoffer-detail"),
 ]
