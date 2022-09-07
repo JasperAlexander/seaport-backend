@@ -7,6 +7,7 @@ class UserPublicSerializer(serializers.Serializer):
     address = serializers.CharField(read_only=True)
     profile_img_url = serializers.URLField(read_only=True)
     config = serializers.CharField(read_only=True)
+    created_timestamp = serializers.DateTimeField(read_only=True)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,5 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "address",
             "profile_img_url",
-            "config"
+            "config",
+            "created_timestamp"
         ]

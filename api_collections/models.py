@@ -1,5 +1,5 @@
 from django.db import models
-from api_tokens.models import Token
+# from api_tokens.models import Token
 
 
 class Collection(models.Model):
@@ -14,5 +14,4 @@ class Collection(models.Model):
     instagram_username = models.CharField(max_length=50, blank=True)
     medium_username = models.CharField(max_length=50, blank=True)
     is_nsfw = models.BooleanField(default=False)
-    payment_tokens = models.ForeignKey(
-        Token, null=True, on_delete=models.SET_NULL)
+    # payment_tokens = models.ManyToManyField(Token, null=True)

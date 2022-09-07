@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Collection
-from api_tokens.serializers import TokenPublicSerializer
+# from api_tokens.serializers import TokenSerializer
 
 
 class CollectionPublicSerializer(serializers.Serializer):
@@ -15,10 +15,11 @@ class CollectionPublicSerializer(serializers.Serializer):
     instagram_username = serializers.CharField(read_only=True)
     medium_username = serializers.CharField(read_only=True)
     is_nsfw = serializers.BooleanField(read_only=True)
+    # payment_tokens = TokenSerializer(read_only=True)
 
 
 class CollectionSerializer(serializers.ModelSerializer):
-    payment_tokens = TokenPublicSerializer(read_only=True)
+    # payment_tokens = TokenSerializer(read_only=True, many=True)
 
     class Meta:
         model = Collection
@@ -34,5 +35,5 @@ class CollectionSerializer(serializers.ModelSerializer):
             "instagram_username",
             "medium_username",
             "is_nsfw",
-            "payment_tokens",
+            # "payment_tokens"
         ]

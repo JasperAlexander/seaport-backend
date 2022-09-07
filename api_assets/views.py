@@ -1,6 +1,6 @@
 from rest_framework import generics, filters
 from .models import Asset
-from .serializers import AssetSerializer
+from .serializers import AssetSerializer, AssetPublicSerializer
 from .mixins import MultipleFieldLookupMixin
 from .pagination import AssetsCursorPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -8,11 +8,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class GetAssetsView(generics.ListAPIView):
     queryset = Asset.objects.all()
-    serializer_class = AssetSerializer
+    serializer_class = AssetPublicSerializer
     pagination_class = AssetsCursorPagination
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter]  # , filters.OrderingFilter]
-    filterset_fields = ["asset_contract__address", "owner__username"]
+    filterset_fields = ["asset_contract__address",
+                        "owner__username", "owner__address"]
     search_fields = ["name", "collection__name"]
     # ordering_fields = [""]
 

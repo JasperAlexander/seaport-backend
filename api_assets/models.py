@@ -2,9 +2,7 @@ from django.db import models
 from api_contracts.models import Contract
 from api_collections.models import Collection
 from api_users.models import User
-from api_tokens.models import Token
-from api_orders.models import Order
-# from api_events.models import Event
+# from api_tokens.models import Token
 
 
 class Asset(models.Model):
@@ -14,19 +12,14 @@ class Asset(models.Model):
     image_url = models.URLField(blank=True)
     external_link = models.URLField(blank=True)
     asset_contract = models.ForeignKey(
-        Contract, null=True, on_delete=models.SET_NULL)
+        Contract, null=True, on_delete=models.SET_NULL, related_name="asset_contract")
     collection = models.ForeignKey(
-        Collection, null=True, on_delete=models.SET_NULL)
+        Collection, null=True, on_delete=models.SET_NULL, related_name="collection")
     owner = models.ForeignKey(
         User, null=True, on_delete=models.SET_NULL, related_name="owner")
     creator = models.ForeignKey(
         User, null=True, on_delete=models.SET_NULL, related_name="creator")
-    # last_sale = models.ForeignKey(
-    #     Event, null=True, blank=True, on_delete=models.SET_NULL)
     transfer_fee = models.IntegerField(default=0)
-    transfer_fee_payment_token = models.ForeignKey(
-        Token, null=True, blank=True, on_delete=models.SET_NULL)
-    orders = models.ForeignKey(
-        Order, null=True, blank=True, on_delete=models.SET_NULL)
+    # transfer_fee_payment_token = models.ForeignKey(
+    #     Token, null=True, blank=True, on_delete=models.SET_NULL, related_name="transfer_fee_payment_token")
     is_nsfw = models.BooleanField(default=False)
-    listing_date = models.DateTimeField(blank=True, null=True)
