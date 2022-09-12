@@ -2,8 +2,8 @@ from rest_framework import serializers
 from .models import Asset
 from api_contracts.serializers import ContractPublicSerializer, EventContractPublicSerializer
 from api_collections.serializers import CollectionPublicSerializer
-from api_users.serializers import UserPublicSerializer
-# from api_tokens.serializers import TokenPublicSerializer
+from api_users.serializers import UserBundleSerializer
+# from api_tokens.serializers import TokenBundleSerializer
 
 
 class EventAssetSerializer(serializers.Serializer):
@@ -20,19 +20,19 @@ class AssetPublicSerializer(serializers.Serializer):
     external_link = serializers.URLField(read_only=True)
     asset_contract = ContractPublicSerializer(read_only=True)
     collection = CollectionPublicSerializer(read_only=True)
-    owner = UserPublicSerializer(read_only=True)
-    creator = UserPublicSerializer(read_only=True)
+    owner = UserBundleSerializer(read_only=True)
+    creator = UserBundleSerializer(read_only=True)
     transfer_fee = serializers.IntegerField(read_only=True)
-    # transfer_fee_payment_token = TokenPublicSerializer(read_only=True)
+    # transfer_fee_payment_token = TokenBundleSerializer(read_only=True)
     is_nsfw = serializers.BooleanField(read_only=True)
 
 
 class AssetSerializer(serializers.ModelSerializer):
     asset_contract = ContractPublicSerializer(read_only=True)
     collection = CollectionPublicSerializer(read_only=True)
-    owner = UserPublicSerializer(read_only=True)
-    creator = UserPublicSerializer(read_only=True)
-    # transfer_fee_payment_token = TokenPublicSerializer(read_only=True)
+    owner = UserBundleSerializer(read_only=True)
+    creator = UserBundleSerializer(read_only=True)
+    # transfer_fee_payment_token = TokenBundleSerializer(read_only=True)
 
     class Meta:
         model = Asset

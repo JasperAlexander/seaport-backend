@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Token
 
 
-class TokenPublicSerializer(serializers.Serializer):
+class TokenBundleSerializer(serializers.Serializer):
     symbol = serializers.CharField(read_only=True)
     address = serializers.CharField(read_only=True)
     image_url = serializers.URLField(read_only=True)
@@ -12,7 +12,22 @@ class TokenPublicSerializer(serializers.Serializer):
     usd_price = serializers.IntegerField(read_only=True)
 
 
-class TokenSerializer(serializers.ModelSerializer):
+class TokenReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Token
+        fields = [
+            "id",
+            "symbol",
+            "address",
+            "image_url",
+            "name",
+            "decimals",
+            "eth_price",
+            "usd_price"
+        ]
+
+
+class TokenWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Token
         fields = [
