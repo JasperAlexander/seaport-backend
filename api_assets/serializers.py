@@ -3,16 +3,19 @@ from .models import Asset
 from api_contracts.serializers import ContractPublicSerializer, EventContractPublicSerializer
 from api_collections.serializers import CollectionPublicSerializer
 from api_users.serializers import UserBundleSerializer
-# from api_tokens.serializers import TokenBundleSerializer
+from api_tokens.serializers import TokenBundleSerializer
+from api_contracts.models import Contract
+from api_tokens.models import Token
+from api_users.models import User
+from api_collections.models import Collection
 
 
 class EventAssetSerializer(serializers.Serializer):
     token_id = serializers.CharField(read_only=True)
     asset_contract = EventContractPublicSerializer(read_only=True)
-    listing_date = serializers.CharField(read_only=True)
 
 
-class AssetPublicSerializer(serializers.Serializer):
+class AssetBundleSerializer(serializers.Serializer):
     token_id = serializers.CharField(read_only=True)
     name = serializers.CharField(read_only=True)
     description = serializers.CharField(read_only=True)
@@ -23,16 +26,16 @@ class AssetPublicSerializer(serializers.Serializer):
     owner = UserBundleSerializer(read_only=True)
     creator = UserBundleSerializer(read_only=True)
     transfer_fee = serializers.IntegerField(read_only=True)
-    # transfer_fee_payment_token = TokenBundleSerializer(read_only=True)
+    transfer_fee_payment_token = TokenBundleSerializer(read_only=True)
     is_nsfw = serializers.BooleanField(read_only=True)
 
 
-class AssetSerializer(serializers.ModelSerializer):
+class AssetReadSerializer(serializers.ModelSerializer):
     asset_contract = ContractPublicSerializer(read_only=True)
     collection = CollectionPublicSerializer(read_only=True)
     owner = UserBundleSerializer(read_only=True)
     creator = UserBundleSerializer(read_only=True)
-    # transfer_fee_payment_token = TokenBundleSerializer(read_only=True)
+    transfer_fee_payment_token = TokenBundleSerializer(read_only=True)
 
     class Meta:
         model = Asset
@@ -48,18 +51,36 @@ class AssetSerializer(serializers.ModelSerializer):
             "owner",
             "creator",
             "transfer_fee",
-            # "transfer_fee_payment_token",
+            "transfer_fee_payment_token",
             "is_nsfw"
         ]
 
-    def create(self, validated_data):
-        request = self.context['request']
-        validated_data['asset_contract_id'] = request.data.get(
-            'asset_contract')
-        validated_data['collection_id'] = request.data.get('collection')
-        validated_data['owner_id'] = request.data.get('owner')
-        validated_data['creator_address'] = request.data.get('creator')
 
-        instance = super().create(validated_data)
+class AssetWriteSerializer(serializers.ModelSerializer):
+    asset_contract = serializers.SlugRelatedField(
+        slug_field='address', queryset=Contract.objects.all())
+    collection = serializers.SlugRelatedField(
+        slug_field='slug', queryset=Collection.objects.all())
+    owner = serializers.SlugRelatedField(
+        slug_field='address', queryset=User.objects.all())
+    creator = serializers.SlugRelatedField(
+        slug_field='address', queryset=User.objects.all())
+    transfer_fee_payment_token = serializers.SlugRelatedField(
+        slug_field='address', queryset=Token.objects.all())
 
-        return instance
+    class Meta:
+        model = Asset
+        fields = [
+            "token_id",
+            "name",
+            "description",
+            "image_url",
+            "external_link",
+            "asset_contract",
+            "collection",
+            "owner",
+            "creator",
+            "transfer_fee",
+            "transfer_fee_payment_token",
+            "is_nsfw"
+        ]

@@ -1,6 +1,6 @@
 from rest_framework import generics, filters
 from .models import Asset
-from .serializers import AssetSerializer, AssetPublicSerializer
+from .serializers import AssetReadSerializer, AssetWriteSerializer
 from .mixins import MultipleFieldLookupMixin
 from .pagination import AssetsCursorPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -8,7 +8,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class GetAssetsView(generics.ListAPIView):
     queryset = Asset.objects.all()
-    serializer_class = AssetPublicSerializer
+    serializer_class = AssetReadSerializer
     pagination_class = AssetsCursorPagination
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter]  # , filters.OrderingFilter]
@@ -20,22 +20,20 @@ class GetAssetsView(generics.ListAPIView):
 
 class GetAssetView(MultipleFieldLookupMixin, generics.RetrieveAPIView):
     queryset = Asset.objects.all()
-    serializer_class = AssetSerializer
+    serializer_class = AssetReadSerializer
     lookup_fields = ["asset_contract__address", "token_id"]
 
 
 class CreateAssetView(generics.CreateAPIView):
     queryset = Asset.objects.all()
-    serializer_class = AssetSerializer
-
-
-class DestroyAssetView(MultipleFieldLookupMixin, generics.DestroyAPIView):
-    queryset = Asset.objects.all()
-    serializer_class = AssetSerializer
-    lookup_fields = ["asset_contract__address", "token_id"]
+    serializer_class = AssetWriteSerializer
 
 
 class UpdateAssetView(MultipleFieldLookupMixin, generics.UpdateAPIView):
     queryset = Asset.objects.all()
-    serializer_class = AssetSerializer
-    lookup_fields = ["asset_contract__address", "token_id"]
+    serializer_class = AssetWriteSerializer
+
+
+# class DestroyAssetView(MultipleFieldLookupMixin, generics.DestroyAPIView):
+#     queryset = Asset.objects.all()
+#     serializer_class = AssetSerializer

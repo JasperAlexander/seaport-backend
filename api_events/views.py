@@ -10,7 +10,8 @@ class GetEventsView(generics.ListAPIView):
     serializer_class = EventReadSerializer
     pagination_class = EventsCursorPagination
     filter_backends = [DjangoFilterBackend,
-                       filters.SearchFilter]  # , filters.OrderingFilter]
+                       filters.SearchFilter]
+    #    filters.OrderingFilter]
     filterset_fields = ["asset__asset_contract__address", "asset__token_id"]
     search_fields = ["asset__asset_contract__address", "asset__token_id"]
 
